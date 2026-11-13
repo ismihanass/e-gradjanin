@@ -1,0 +1,4 @@
+@model List<AuditLog>
+@{ViewData["Title"]="Revizijski trag";}
+<div class="page-heading"><div><div class="eyebrow">SIGURNOST I NADZOR</div><h1>Revizijski trag</h1><p>Posljednjih 300 evidentiranih događaja.</p></div><a asp-action="Index" class="btn btn-outline-secondary">Nazad</a></div>
+<div class="panel"><div class="table-responsive"><table class="table"><thead><tr><th>Vrijeme</th><th>Akter</th><th>Akcija</th><th>Detalji</th></tr></thead><tbody>@foreach(var x in Model){<tr><td>@x.CreatedAt.ToLocalTime().ToString("dd.MM.yyyy. HH:mm:ss")</td><td>@x.ActorId</td><td><code>@x.Action</code></td><td>@x.Details</td></tr>}</tbody></table></div></div>

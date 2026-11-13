@@ -1,0 +1,4 @@
+@model List<ApplicationUser>
+@{ViewData["Title"]="Korisnici";}
+<div class="page-heading"><div><div class="eyebrow">ADMINISTRACIJA</div><h1>Korisnici i uloge</h1><p>Promjena demo uloga korisničkih računa.</p></div><a asp-action="Index" class="btn btn-outline-secondary">Nazad</a></div>
+<div class="panel"><div class="table-responsive"><table class="table align-middle"><thead><tr><th>Korisnik</th><th>E-mail</th><th>Promijeni ulogu</th></tr></thead><tbody>@foreach(var u in Model){<tr><td>@u.FullName</td><td>@u.Email</td><td><form asp-action="ChangeRole" method="post" class="d-flex gap-2"><input type="hidden" name="userId" value="@u.Id"/><select class="form-select form-select-sm" name="role"><option>Citizen</option><option>Registrar</option><option>Administrator</option></select><button class="btn btn-sm btn-outline-primary">Sačuvaj</button></form></td></tr>}</tbody></table></div></div>

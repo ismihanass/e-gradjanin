@@ -1,0 +1,4 @@
+@model List<AdministrativeService>
+@{ViewData["Title"]="Katalog usluga";}
+<div class="page-heading"><div><div class="eyebrow">ADMINISTRACIJA</div><h1>Katalog usluga</h1><p>Uključivanje ili isključivanje usluga u demo katalogu.</p></div><a asp-action="Index" class="btn btn-outline-secondary">Nazad</a></div>
+<div class="panel"><div class="table-responsive"><table class="table align-middle"><thead><tr><th>Usluga</th><th>Kategorija</th><th>Demo naknada</th><th>Status</th><th></th></tr></thead><tbody>@foreach(var s in Model){<tr><td>@s.Name</td><td>@s.Category</td><td>@s.Fee.ToString("0.00") KM</td><td>@(s.IsActive?"Aktivna":"Neaktivna")</td><td><form asp-action="ToggleService" method="post"><input type="hidden" name="id" value="@s.Id"/><button class="btn btn-sm btn-outline-primary">@(s.IsActive?"Deaktiviraj":"Aktiviraj")</button></form></td></tr>}</tbody></table></div></div>

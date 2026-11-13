@@ -1,0 +1,41 @@
+@model LoginViewModel
+@{
+    ViewData["Title"] = "Prijava";
+}
+<div class="auth-wrap">
+    <div class="auth-card">
+        <div class="eyebrow">eGRAĐANIN FBiH · DIGITALNI ŠALTER</div>
+        <h1>Dobro došli</h1>
+        <p class="text-secondary">Prijavite se. Sistem će vas automatski usmjeriti na panel koji odgovara vašoj korisničkoj ulozi.</p>
+        <form asp-controller="Account" asp-action="Login" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+            <div class="mb-3">
+                <label asp-for="Email" class="form-label">E-mail adresa</label>
+                <input asp-for="Email" class="form-control" autocomplete="username" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Password" class="form-label">Lozinka</label>
+                <input asp-for="Password" class="form-control" autocomplete="current-password" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-check mb-3">
+                <input asp-for="RememberMe" class="form-check-input" />
+                <label asp-for="RememberMe" class="form-check-label">Zapamti me</label>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Prijavi se</button>
+        </form>
+        <div class="text-center mt-4">
+            <div class="small text-secondary mb-2">Nemate korisnički račun?</div>
+            <a asp-controller="Account" asp-action="Register" class="btn btn-outline-primary w-100">Kreiraj građanski račun</a>
+        </div>
+        <hr class="my-4" />
+        <div class="small text-secondary">
+            <strong class="d-block text-dark mb-2">Demo računi za testiranje</strong>
+            <div class="mb-2"><strong>Građanin</strong><br />gradjanin@egradjanin.demo · Gradjanin123!</div>
+            <div class="mb-2"><strong>Šalterski radnik</strong><br />sluzbenik@egradjanin.demo · Sluzbenik123!</div>
+            <div><strong>Administrator</strong><br />admin@egradjanin.demo · Admin123!</div>
+        </div>
+        <p class="small text-warning mt-3 mb-0">Demo okruženje: koristite isključivo testne podatke, ne stvarne lične podatke.</p>
+    </div>
+</div>

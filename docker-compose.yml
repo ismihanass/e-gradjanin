@@ -1,0 +1,32 @@
+services:
+  db:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: egradjanin
+      POSTGRES_USER: egradjanin
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-LocalDemoPassword_ChangeMe}
+    volumes:
+      - egradjanin_pg:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U egradjanin -d egradjanin"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+  web:
+    build: .
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: http://+:8080
+      ConnectionStrings__DefaultConnection: Host=db;Port=5432;Database=egradjanin;Username=egradjanin;Password=${POSTGRES_PASSWORD:-LocalDemoPassword_ChangeMe}
+    ports:
+      - "8080:8080"
+    volumes:
+      - egradjanin_uploads:/app/App_Data
+volumes:
+  egradjanin_pg:
+  egradjanin_uploads:
